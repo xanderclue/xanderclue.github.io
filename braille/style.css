@@ -1,0 +1,19 @@
+body {
+  background-color: black;
+  font-family: monospace;
+  font-size: 27px;
+  line-break: strict;
+  display: flex;
+}
+
+#brailleText {
+  color: white;
+  width: 50%;
+  overflow-wrap: break-word;
+}
+
+#asciiText {
+  color: red;
+  width: 50%;
+  overflow-wrap: break-word;
+}
