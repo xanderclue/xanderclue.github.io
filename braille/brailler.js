@@ -32,9 +32,16 @@ let currStr = '';
 let keysDown = new Set();
 
 function updateText() {
-  let htmlText = currStr.split('\n').join('<br>');
-  document.getElementById('brailleText').innerHTML = htmlText.split(EMPTY_CELL_STR).join(' ');
-  document.getElementById('asciiText').innerHTML = BrailleToAscii(htmlText);
+  document.getElementById('brailleText').innerHTML = currStr
+    .split('\n').join('<br>')
+    .split(EMPTY_CELL_STR).join(' ');
+  document.getElementById('asciiText').innerHTML = BrailleToAscii(currStr)
+    .split('&').join('&amp;')
+    .split('"').join('&quot;')
+    .split('\'').join('&apos;')
+    .split('<').join('&lt;')
+    .split('>').join('&gt;')
+    .split('\n').join('<br>');
 }
 
 document.addEventListener('keydown', ({keyCode}) => {
