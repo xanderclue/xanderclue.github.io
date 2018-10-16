@@ -1,9 +1,4 @@
-const keyCode_DOT_1 = 70; // F
-const keyCode_DOT_2 = 68; // D
-const keyCode_DOT_3 = 83; // S
-const keyCode_DOT_4 = 74; // J
-const keyCode_DOT_5 = 75; // K
-const keyCode_DOT_6 = 76; // L
+const keyCode_DOTS = [70, 68, 83, 74, 75, 76]; // FDSJKL
 const keyCode_ENTER = 13;
 const keyCode_SPACE = 32;
 const keyCode_BCKSP = 8;
@@ -11,12 +6,12 @@ const keyCode_CLEAR = 81; // Q
 const EMPTY_CELL = 0x2800;
 const EMPTY_CELL_STR = String.fromCharCode(EMPTY_CELL);
 const dotmap = new Map([
-  [keyCode_DOT_1, 0x01],
-  [keyCode_DOT_2, 0x02],
-  [keyCode_DOT_3, 0x04],
-  [keyCode_DOT_4, 0x08],
-  [keyCode_DOT_5, 0x10],
-  [keyCode_DOT_6, 0x20]
+  [keyCode_DOTS[0], 0x01],
+  [keyCode_DOTS[1], 0x02],
+  [keyCode_DOTS[2], 0x04],
+  [keyCode_DOTS[3], 0x08],
+  [keyCode_DOTS[4], 0x10],
+  [keyCode_DOTS[5], 0x20]
 ]);
 
 let brlasc = new Map();
