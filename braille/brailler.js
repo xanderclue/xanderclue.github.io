@@ -15,8 +15,16 @@ const dotmap = new Map([
 ]);
 
 let brlasc = new Map();
-const ascii = " a1b'k2l@cif/msp\"e3h9o6r^djg>ntq,*5<-u8v.%[$+x!&;:4\\0z7(_?w]#y)=".split('');
-ascii.forEach((chr, idx) => brlasc.set(String.fromCharCode(EMPTY_CELL | idx), chr));
+[
+  ' ', 'a', '1', 'b', '\'', 'k', '2', 'l',
+  '@', 'c', 'i', 'f',  '/', 'm', 's', 'p',
+  '"', 'e', '3', 'h',  '9', 'o', '6', 'r',
+  '^', 'd', 'j', 'g',  '>', 'n', 't', 'q',
+  ',', '*', '5', '<',  '-', 'u', '8', 'v',
+  '.', '%', '[', '$',  '+', 'x', '!', '&',
+  ';', ':', '4', '\\', '0', 'z', '7', '(',
+  '_', '?', 'w', ']',  '#', 'y', ')', '='
+].forEach((chr, idx) => brlasc.set(String.fromCharCode(EMPTY_CELL | idx), chr));
 BrailleToAscii = string => string.split('').map(char => brlasc.get(char) || char).join('');
 
 let currChr = 0;
@@ -29,36 +37,33 @@ function updateText() {
   document.getElementById('asciiText').innerHTML = BrailleToAscii(htmlText);
 }
 
-function onKeyDown(e) {
-  if (dotmap.has(e.keyCode) && !keysDown.has(e.keyCode)) {
-    currChr |= dotmap.get(e.keyCode);
-    keysDown.add(e.keyCode);
+document.addEventListener('keydown', ({keyCode}) => {
+  if (dotmap.has(keyCode) && !keysDown.has(keyCode)) {
+    currChr |= dotmap.get(keyCode);
+    keysDown.add(keyCode);
   } else {
-    if (keyCode_BCKSP === e.keyCode) {
+    if (keyCode_BCKSP === keyCode) {
       if (0 !== currStr.length) {
         currStr = currStr.substr(0, currStr.length - 1);
       }
-    } else if (keyCode_CLEAR === e.keyCode) {
+    } else if (keyCode_CLEAR === keyCode) {
       currStr = '';
     }
     updateText();
   }
-}
+});
 
-function onKeyUp(e) {
-  if (keyCode_ENTER === e.keyCode) {
+document.addEventListener('keyup', ({keyCode}) => {
+  if (keyCode_ENTER === keyCode) {
     currStr = currStr.concat('\n');
-  } else if (keyCode_SPACE === e.keyCode) {
+  } else if (keyCode_SPACE === keyCode) {
     currStr = currStr.concat(EMPTY_CELL_STR);
-  } else if (dotmap.has(e.keyCode)) {
-    keysDown.delete(e.keyCode);
+  } else if (dotmap.has(keyCode)) {
+    keysDown.delete(keyCode);
     if (0 === keysDown.size) {
       currStr = currStr.concat(String.fromCharCode(EMPTY_CELL | currChr));
       currChr = 0;
     }
   } else return;
   updateText();
-}
-
-document.addEventListener('keydown', onKeyDown);
-document.addEventListener('keyup', onKeyUp);
+});

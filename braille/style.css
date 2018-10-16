@@ -1,5 +1,5 @@
 body {
-  background-color: #111;
+  background-color: #181818;
   font-family: monospace;
   font-size: 27px;
   line-break: strict;
@@ -7,13 +7,13 @@ body {
 }
 
 #brailleText {
-  color: #1e1;
+  color: #18ee18;
   width: 50%;
   overflow-wrap: break-word;
 }
 
 #asciiText {
-  color: #e11;
+  color: #ee1818;
   width: 50%;
   overflow-wrap: break-word;
 }
