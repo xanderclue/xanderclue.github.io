@@ -16,35 +16,32 @@ const dotmap = new Map([
 
 let brlasc = new Map();
 [
-  ' ', 'a', '1', 'b', '\'', 'k', '2', 'l',
-  '@', 'c', 'i', 'f',  '/', 'm', 's', 'p',
-  '"', 'e', '3', 'h',  '9', 'o', '6', 'r',
-  '^', 'd', 'j', 'g',  '>', 'n', 't', 'q',
-  ',', '*', '5', '<',  '-', 'u', '8', 'v',
-  '.', '%', '[', '$',  '+', 'x', '!', '&',
-  ';', ':', '4', '\\', '0', 'z', '7', '(',
-  '_', '?', 'w', ']',  '#', 'y', ')', '='
+  '&nbsp;', 'a', '1', 'b', '&apos;', 'k', '2', 'l',
+  '&commat;', 'c', 'i', 'f',  '&sol;', 'm', 's', 'p',
+  '&quot;', 'e', '3', 'h',  '9', 'o', '6', 'r',
+  '&Hat;', 'd', 'j', 'g',  '&gt;', 'n', 't', 'q',
+  '&comma;', '&ast;', '5', '&lt;',  '-', 'u', '8', 'v',
+  '&period;', '&percnt;', '&lbrack;', '&dollar;',  '&plus;', 'x', '&excl;', '&amp;',
+  '&semi;', '&colon;', '4', '&bsol;', '0', 'z', '7', '&lpar;',
+  '&lowbar;', '&quest;', 'w', '&rbrack;',  '&num;', 'y', '&rpar;', '&equals;'
 ].forEach((chr, idx) => brlasc.set(String.fromCharCode(EMPTY_CELL | idx), chr));
 BrailleToAscii = string => string.split('').map(char => brlasc.get(char) || char).join('');
 
 let currChr = 0;
 let currStr = '';
 let keysDown = new Set();
+let inited = false;
 
 function updateText() {
-  document.getElementById('brailleText').innerHTML = currStr
-    .split('\n').join('<br>')
-    .split(EMPTY_CELL_STR).join(' ');
-  document.getElementById('asciiText').innerHTML = BrailleToAscii(currStr)
-    .split('&').join('&amp;')
-    .split('"').join('&quot;')
-    .split('\'').join('&apos;')
-    .split('<').join('&lt;')
-    .split('>').join('&gt;')
-    .split('\n').join('<br>');
+  localStorage.setItem('text', currStr);
+  document.getElementById('brailleText').innerHTML = currStr.split('\n').join('<br>');
+  document.getElementById('asciiText').innerHTML = BrailleToAscii(currStr).split('\n').join('<br>');
 }
 
 document.addEventListener('keydown', ({keyCode}) => {
+  if (!inited) {
+    return;
+  }
   if (dotmap.has(keyCode) && !keysDown.has(keyCode)) {
     currChr |= dotmap.get(keyCode);
     keysDown.add(keyCode);
@@ -61,6 +58,9 @@ document.addEventListener('keydown', ({keyCode}) => {
 });
 
 document.addEventListener('keyup', ({keyCode}) => {
+  if (!inited) {
+    return;
+  }
   if (keyCode_ENTER === keyCode) {
     currStr = currStr.concat('\n');
   } else if (keyCode_SPACE === keyCode) {
@@ -73,4 +73,14 @@ document.addEventListener('keyup', ({keyCode}) => {
     }
   } else return;
   updateText();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  let text = localStorage.getItem('text');
+  if (!text) {
+    text = '';
+  }
+  currStr = text;
+  updateText();
+  inited = true;
 });

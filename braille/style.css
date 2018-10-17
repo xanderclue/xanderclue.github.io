@@ -5,44 +5,79 @@ body {
   word-break: break-all;
 }
 
-#top {
+#info {
   position: fixed;
-  overflow: scroll;
-  top: 0;
+  top: 1%;
   left: 0;
   right: 0;
-  height: 45%;
+  font-size: 2vh;
+  color: #801880;
+  background-color: #101010;
+}
+
+#info:hover {
+  color: #828;
+  background-color: #202020;
+}
+
+#work {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 5%;
+  height: 90%;
+}
+
+#top, #bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  overflow: scroll;
   border-style: solid;
-  border-color: #18ee18;
   border-width: thin;
+}
+
+#top {
+  top: 0;
+  height: 46%;
+  border-color: #18ee18;
 }
 
 #bottom {
-  position: fixed;
-  overflow: scroll;
   bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  border-style: solid;
+  height: 52%;
   border-color: #ee1818;
-  border-width: thin;
+}
+
+#brailleText, #asciiText {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  top: 0;
+  letter-spacing: -1px;
 }
 
 #brailleText {
-  font-size: 28px;
+  font-size: 29px;
   color: #18ee18;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  top: 0;
-  letter-spacing: 2px;
 }
 
 #asciiText {
-  font-size: 34px;
+  font-size: 33px;
   color: #ee1818;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  top: 0;
-  letter-spacing: 1px;
+}
+
+.link:link {
+  color: #ddd;
+}
+
+.link:visited {
+  color: #777;
+}
+
+.link:hover {
+  color: #fff;
+}
+
+.link:active {
+  color: #bbb;
 }
