@@ -20,7 +20,7 @@ let brlasc = new Map();
   '&commat;', 'c', 'i', 'f',  '&sol;', 'm', 's', 'p',
   '&quot;', 'e', '3', 'h',  '9', 'o', '6', 'r',
   '&Hat;', 'd', 'j', 'g',  '&gt;', 'n', 't', 'q',
-  '&comma;', '&ast;', '5', '&lt;',  '-', 'u', '8', 'v',
+  '&comma;', '&ast;', '5', '&lt;',  '&#45;', 'u', '8', 'v',
   '&period;', '&percnt;', '&lbrack;', '&dollar;',  '&plus;', 'x', '&excl;', '&amp;',
   '&semi;', '&colon;', '4', '&bsol;', '0', 'z', '7', '&lpar;',
   '&lowbar;', '&quest;', 'w', '&rbrack;',  '&num;', 'y', '&rpar;', '&equals;'
